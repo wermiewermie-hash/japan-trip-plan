@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Reveal from "@/app/components/Reveal";
 
 const CROSS_SVG = `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E")`;
 
@@ -90,7 +91,7 @@ function CategoryCard({ cat, totalYen }: { cat: Category; totalYen: number }) {
   const pct = totalYen > 0 ? Math.round(cat.totalYen / totalYen * 100) : 0;
 
   return (
-    <div style={{ background: "var(--white)", borderRadius: "var(--radius)", boxShadow: "var(--shadow)", marginBottom: 16, overflow: "hidden" }}>
+    <div className="card-hover" style={{ background: "var(--white)", borderRadius: "var(--radius)", marginBottom: 16, overflow: "hidden" }}>
       <div
         onClick={() => setOpen(o => !o)}
         style={{
@@ -118,7 +119,7 @@ function CategoryCard({ cat, totalYen }: { cat: Category; totalYen: number }) {
       </div>
 
       {open && (
-        <div style={{ padding: "16px 20px" }}>
+        <div className="expand-in" style={{ padding: "16px 20px" }}>
           {cat.items.map((item, i) => (
             <div key={i} style={{
               display: "flex", justifyContent: "space-between", alignItems: "baseline",
@@ -154,9 +155,15 @@ function CategoryCard({ cat, totalYen }: { cat: Category; totalYen: number }) {
 }
 
 export default function Budget() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    const t = requestAnimationFrame(() => setMounted(true));
+    return () => cancelAnimationFrame(t);
+  }, []);
+
   return (
     <>
-      <div style={{
+      <div className="animate-hero" style={{
         background: "linear-gradient(135deg, var(--green-deep) 0%, var(--green-mid) 100%)",
         padding: "48px 24px 40px", textAlign: "center", position: "relative", overflow: "hidden",
       }}>
@@ -177,72 +184,84 @@ export default function Budget() {
             { label: "Total", amount: `¥${fmt(knownTotalYen)}`, sub: `$${usd(knownTotalYen)} USD`, color: "var(--green-deep)" },
             { label: "Per couple", amount: `¥${fmt(Math.round(knownTotalYen / 2))}`, sub: `$${usd(knownTotalYen / 2)} USD`, color: "var(--green-mid)" },
             { label: "Per person", amount: `¥${fmt(Math.round(knownTotalYen / 4))}`, sub: `$${usd(knownTotalYen / 4)} USD`, color: "var(--gold)" },
-          ].map(({ label, amount, sub, color }) => (
-            <div key={label} style={{ background: "white", borderRadius: "var(--radius)", boxShadow: "var(--shadow)", padding: 20, textAlign: "center" }}>
-              <div style={{ fontSize: "0.75rem", color: "var(--text-light)", letterSpacing: "0.08em", textTransform: "uppercase" }}>{label}</div>
-              <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.7rem", fontWeight: 700, margin: "6px 0 2px", color }}>{amount}</div>
-              <div style={{ fontSize: "0.78rem", color: "var(--text-light)" }}>{sub}</div>
-            </div>
+          ].map(({ label, amount, sub, color }, i) => (
+            <Reveal key={label} delay={i * 150} style={{ display: "flex" }}>
+              <div className="card-hover" style={{ flex: 1, background: "white", borderRadius: "var(--radius)", padding: 20, textAlign: "center" }}>
+                <div style={{ fontSize: "0.75rem", color: "var(--text-light)", letterSpacing: "0.08em", textTransform: "uppercase" }}>{label}</div>
+                <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.7rem", fontWeight: 700, margin: "6px 0 2px", color }}>{amount}</div>
+                <div style={{ fontSize: "0.78rem", color: "var(--text-light)" }}>{sub}</div>
+              </div>
+            </Reveal>
           ))}
         </div>
 
         {/* Breakdown bars */}
-        <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
-          <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.2rem", color: "var(--green-deep)" }}>📊 Breakdown</h2>
-          <div style={{ flex: 1, height: 1, background: "var(--border)" }} />
-        </div>
-
-        <div style={{ background: "white", borderRadius: "var(--radius)", boxShadow: "var(--shadow)", padding: "20px 24px", marginBottom: 28 }}>
-          {CATEGORIES.map(cat => {
-            const pct = knownTotalYen > 0 ? Math.round(cat.totalYen / knownTotalYen * 100) : 0;
-            return (
-              <div key={cat.id} style={{ marginBottom: 16 }}>
-                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6, fontSize: "0.85rem" }}>
-                  <span style={{ fontWeight: 600, color: "var(--text)" }}>{cat.icon} {cat.name}</span>
-                  <span style={{ color: "var(--text-light)" }}>
-                    {cat.totalYen > 0 ? `¥${fmt(cat.totalYen)}` : "TBD"}
-                    {cat.totalYen > 0 && <span style={{ marginLeft: 6 }}>({pct}%)</span>}
-                  </span>
-                </div>
-                <div style={{ background: "var(--cream-dark)", borderRadius: 99, height: 12, overflow: "hidden" }}>
-                  <div style={{ height: "100%", borderRadius: 99, width: `${pct}%`, background: cat.color, transition: "width 0.8s" }} />
-                </div>
-              </div>
-            );
-          })}
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 20, justifyContent: "center" }}>
-            {CATEGORIES.map(cat => (
-              <div key={cat.id} style={{ display: "flex", alignItems: "center", gap: 6, fontSize: "0.78rem", color: "var(--text-mid)" }}>
-                <div style={{ width: 10, height: 10, borderRadius: "50%", background: cat.color, flexShrink: 0 }} />
-                {cat.name}
-              </div>
-            ))}
+        <Reveal>
+          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.2rem", color: "var(--green-deep)" }}>📊 Breakdown</h2>
+            <div style={{ flex: 1, height: 1, background: "var(--border)" }} />
           </div>
-        </div>
+
+          <div style={{ background: "white", borderRadius: "var(--radius)", boxShadow: "var(--shadow)", padding: "20px 24px", marginBottom: 28 }}>
+            {CATEGORIES.map((cat, i) => {
+              const pct = knownTotalYen > 0 ? Math.round(cat.totalYen / knownTotalYen * 100) : 0;
+              return (
+                <div key={cat.id} style={{ marginBottom: 16 }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 6, fontSize: "0.85rem" }}>
+                    <span style={{ fontWeight: 600, color: "var(--text)" }}>{cat.icon} {cat.name}</span>
+                    <span style={{ color: "var(--text-light)" }}>
+                      {cat.totalYen > 0 ? `¥${fmt(cat.totalYen)}` : "TBD"}
+                      {cat.totalYen > 0 && <span style={{ marginLeft: 6 }}>({pct}%)</span>}
+                    </span>
+                  </div>
+                  <div style={{ background: "var(--cream-dark)", borderRadius: 99, height: 12, overflow: "hidden" }}>
+                    <div style={{ height: "100%", borderRadius: 99, width: `${mounted ? pct : 0}%`, background: cat.color, transition: `width 1.3s var(--ease-out) ${250 + i * 160}ms` }} />
+                  </div>
+                </div>
+              );
+            })}
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginTop: 20, justifyContent: "center" }}>
+              {CATEGORIES.map(cat => (
+                <div key={cat.id} style={{ display: "flex", alignItems: "center", gap: 6, fontSize: "0.78rem", color: "var(--text-mid)" }}>
+                  <div style={{ width: 10, height: 10, borderRadius: "50%", background: cat.color, flexShrink: 0 }} />
+                  {cat.name}
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
 
         {/* Detail cards */}
-        <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
-          <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.2rem", color: "var(--green-deep)" }}>📋 Detail</h2>
-          <div style={{ flex: 1, height: 1, background: "var(--border)" }} />
-        </div>
+        <Reveal>
+          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.2rem", color: "var(--green-deep)" }}>📋 Detail</h2>
+            <div style={{ flex: 1, height: 1, background: "var(--border)" }} />
+          </div>
+        </Reveal>
 
-        {CATEGORIES.map(cat => <CategoryCard key={cat.id} cat={cat} totalYen={knownTotalYen} />)}
+        {CATEGORIES.map((cat, i) => (
+          <Reveal key={cat.id} delay={Math.min(i * 110, 550)}>
+            <CategoryCard cat={cat} totalYen={knownTotalYen} />
+          </Reveal>
+        ))}
 
         {/* Grand total */}
-        <div style={{
-          background: "linear-gradient(135deg, var(--green-deep), var(--green-mid))",
-          borderRadius: "var(--radius)", padding: "20px 24px", color: "white",
-          display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 8,
-          flexWrap: "wrap", gap: 8,
-        }}>
-          <div>
-            <div style={{ fontSize: "1.1rem", fontWeight: 700 }}>Known total</div>
-            <div style={{ fontSize: "0.78rem", opacity: 0.7 }}>Excl. flights, Nara→Tokyo, sightseeing & misc</div>
+        <Reveal>
+          <div style={{
+            background: "linear-gradient(135deg, var(--green-deep), var(--green-mid))",
+            borderRadius: "var(--radius)", padding: "20px 24px", color: "white",
+            display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 8,
+            flexWrap: "wrap", gap: 8,
+          }}>
+            <div>
+              <div style={{ fontSize: "1.1rem", fontWeight: 700 }}>Known total</div>
+              <div style={{ fontSize: "0.78rem", opacity: 0.7 }}>Excl. flights, Nara→Tokyo, sightseeing & misc</div>
+            </div>
+            <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "2rem", fontWeight: 700, color: "var(--gold)" }}>
+              ¥{fmt(knownTotalYen)}
+            </div>
           </div>
-          <div style={{ fontFamily: "'Playfair Display', serif", fontSize: "2rem", fontWeight: 700, color: "var(--gold)" }}>
-            ¥{fmt(knownTotalYen)}
-          </div>
-        </div>
+        </Reveal>
 
       </div>
     </>

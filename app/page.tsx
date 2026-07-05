@@ -2,11 +2,12 @@
 
 import Link from "next/link";
 import dynamic from "next/dynamic";
+import Reveal from "@/app/components/Reveal";
 
 const TripMap = dynamic(() => import("@/app/components/TripMap"), {
   ssr: false,
   loading: () => (
-    <div style={{ height: 480, background: "var(--cream-dark)", borderRadius: "var(--radius)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+    <div className="skeleton" style={{ height: 480, borderRadius: "var(--radius)", display: "flex", alignItems: "center", justifyContent: "center" }}>
       <span style={{ color: "var(--text-light)", fontSize: "0.85rem", letterSpacing: "0.1em" }}>Loading map…</span>
     </div>
   ),
@@ -22,7 +23,7 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <div style={{
+      <div className="animate-hero" style={{
         background: "linear-gradient(135deg, var(--green-deep) 0%, #1f4d36 60%, #2d7a56 100%)",
         padding: "56px 24px 48px", textAlign: "center", position: "relative", overflow: "hidden",
       }}>
@@ -65,7 +66,7 @@ export default function Home() {
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "32px 24px" }}>
 
         {/* Map section */}
-        <div style={{ marginBottom: 40 }}>
+        <Reveal style={{ marginBottom: 40 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
             <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.3rem", color: "var(--green-deep)" }}>
               🗺️ Trip Route
@@ -73,32 +74,36 @@ export default function Home() {
             <div style={{ flex: 1, height: 1, background: "var(--border)" }} />
           </div>
           <TripMap />
-        </div>
+        </Reveal>
 
         {/* Quick links */}
-        <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
-          <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.3rem", color: "var(--green-deep)" }}>
-            📂 Pages
-          </h2>
-          <div style={{ flex: 1, height: 1, background: "var(--border)" }} />
-        </div>
+        <Reveal>
+          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
+            <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.3rem", color: "var(--green-deep)" }}>
+              📂 Pages
+            </h2>
+            <div style={{ flex: 1, height: 1, background: "var(--border)" }} />
+          </div>
+        </Reveal>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16, marginBottom: 32 }}>
           {[
             { href: "/itinerary", icon: "📅", title: "Itinerary", desc: "Day-by-day plan across all four cities", accent: "var(--green-light)" },
             { href: "/places",    icon: "🎯", title: "Activities", desc: "Hotels, sights, and restaurants",      accent: "var(--gold)" },
             { href: "/budget",    icon: "💴", title: "Budget",    desc: "Estimated costs in yen and USD",        accent: "var(--red-japan)" },
-          ].map(({ href, icon, title, desc, accent }) => (
-            <Link key={href} href={href} style={{ textDecoration: "none" }}>
-              <div style={{
-                background: "var(--white)", borderRadius: "var(--radius)",
-                boxShadow: "var(--shadow)", padding: "24px 16px", textAlign: "center",
-                borderTop: `4px solid ${accent}`, transition: "all 0.2s",
-              }}>
-                <div style={{ fontSize: "2rem", marginBottom: 8 }}>{icon}</div>
-                <div style={{ fontSize: "0.95rem", fontWeight: 700, color: "var(--green-deep)" }}>{title}</div>
-                <div style={{ fontSize: "0.78rem", color: "var(--text-light)", marginTop: 4 }}>{desc}</div>
-              </div>
-            </Link>
+          ].map(({ href, icon, title, desc, accent }, i) => (
+            <Reveal key={href} delay={i * 150}>
+              <Link href={href} style={{ textDecoration: "none" }}>
+                <div className="card-hover" style={{
+                  background: "var(--white)", borderRadius: "var(--radius)",
+                  padding: "24px 16px", textAlign: "center",
+                  borderTop: `4px solid ${accent}`,
+                }}>
+                  <div style={{ fontSize: "2rem", marginBottom: 8 }}>{icon}</div>
+                  <div style={{ fontSize: "0.95rem", fontWeight: 700, color: "var(--green-deep)" }}>{title}</div>
+                  <div style={{ fontSize: "0.78rem", color: "var(--text-light)", marginTop: 4 }}>{desc}</div>
+                </div>
+              </Link>
+            </Reveal>
           ))}
         </div>
       </div>

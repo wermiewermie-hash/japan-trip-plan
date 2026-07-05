@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Reveal from "@/app/components/Reveal";
 
 const CROSS_SVG = `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E")`;
 
@@ -285,7 +286,7 @@ export default function Itinerary() {
 
   return (
     <>
-      <div style={{
+      <div className="animate-hero" style={{
         background: "linear-gradient(135deg, var(--green-deep) 0%, var(--green-mid) 100%)",
         padding: "48px 24px 40px", textAlign: "center", position: "relative", overflow: "hidden",
       }}>
@@ -328,11 +329,11 @@ export default function Itinerary() {
             background: "linear-gradient(to bottom, var(--green-light), var(--gold))",
           }} />
 
-          {filtered.map(day => {
+          {filtered.map((day, idx) => {
             const color = cityColors[day.city] ?? "#888";
             const isOpen = openDays.has(day.day);
             return (
-              <div key={day.day} style={{ position: "relative", marginBottom: 24 }}>
+              <Reveal key={day.day} delay={Math.min(idx * 100, 600)} style={{ position: "relative", marginBottom: 24 }}>
                 <div style={{
                   position: "absolute", left: -32, top: 16,
                   width: 14, height: 14, borderRadius: "50%",
@@ -372,7 +373,7 @@ export default function Itinerary() {
 
                   {/* Timeline */}
                   {isOpen && (
-                    <div style={{ padding: "6px 0 10px" }}>
+                    <div className="expand-in" style={{ padding: "6px 0 10px" }}>
                       {day.items.map((item, i) => (
                         <div key={i} style={{
                           display: "flex", alignItems: "flex-start", gap: 10,
@@ -440,7 +441,7 @@ export default function Itinerary() {
                     </div>
                   )}
                 </div>
-              </div>
+              </Reveal>
             );
           })}
         </div>

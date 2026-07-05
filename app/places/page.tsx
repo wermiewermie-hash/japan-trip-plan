@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Reveal from "@/app/components/Reveal";
 
 const CROSS_SVG = `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E")`;
 
@@ -112,10 +113,10 @@ function PlaceCard({ item, city, showCity }: { item: PlaceItem; city: string; sh
   );
 
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer" style={{
+    <a href={href} target="_blank" rel="noopener noreferrer" className="card-hover img-zoom" style={{
       display: "block", textDecoration: "none", color: "inherit", cursor: "pointer",
       background: "var(--white)", borderRadius: "var(--radius)",
-      boxShadow: "var(--shadow)", overflow: "hidden",
+      overflow: "hidden",
       borderBottom: `3px solid ${tColor}`,
     }}>
       {item.image ? (
@@ -147,7 +148,7 @@ export default function Places() {
 
   return (
     <>
-      <div style={{
+      <div className="animate-hero" style={{
         background: "linear-gradient(135deg, var(--green-deep) 0%, var(--green-mid) 100%)",
         padding: "48px 24px 40px", textAlign: "center", position: "relative", overflow: "hidden",
       }}>
@@ -192,7 +193,11 @@ export default function Places() {
                 )}
 
                 <div style={GRID}>
-                  {items.map(item => <PlaceCard key={item.name} item={item} city={city} />)}
+                  {items.map((item, i) => (
+                    <Reveal key={item.name} delay={Math.min(i * 120, 700)} style={{ display: "flex" }}>
+                      <div style={{ flex: 1 }}><PlaceCard item={item} city={city} /></div>
+                    </Reveal>
+                  ))}
                 </div>
               </div>
             ))}
@@ -212,7 +217,11 @@ export default function Places() {
                   </div>
 
                   <div style={GRID}>
-                    {group.map(({ item, city }) => <PlaceCard key={city + item.name} item={item} city={city} showCity />)}
+                    {group.map(({ item, city }, i) => (
+                      <Reveal key={city + item.name} delay={Math.min(i * 120, 700)} style={{ display: "flex" }}>
+                        <div style={{ flex: 1 }}><PlaceCard item={item} city={city} showCity /></div>
+                      </Reveal>
+                    ))}
                   </div>
                 </div>
               );
