@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   output: "export",
   trailingSlash: true,
   images: { unoptimized: true },
-  basePath: "/japan-trip-plan",
+  basePath: process.env.NODE_ENV === "production" ? "/japan-trip-plan" : "",
 };
 
 export default nextConfig;

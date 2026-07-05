@@ -10,27 +10,42 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="min-h-screen flex flex-col">
-        <header style={{ borderBottom: "1px solid var(--border)" }} className="py-6 px-8">
-          <nav className="max-w-3xl mx-auto flex items-baseline justify-between">
-            <Link href="/" className="text-lg tracking-widest uppercase no-underline" style={{ color: "var(--ink)" }}>
+      <body>
+        <nav style={{
+          position: "sticky", top: 0, zIndex: 100,
+          height: "var(--nav-height)", background: "var(--green-deep)",
+          display: "flex", alignItems: "center", padding: "0 24px", gap: "8px",
+          boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
+        }}>
+          <Link href="/" style={{ textDecoration: "none", marginRight: "auto" }}>
+            <div style={{
+              fontFamily: "'Playfair Display', serif", color: "var(--gold)",
+              fontSize: "1.15rem", letterSpacing: "0.04em", whiteSpace: "nowrap",
+            }}>
               Japan 2026
-            </Link>
-            <div className="flex gap-8 text-sm tracking-wider">
-              <Link href="/itinerary" className="uppercase no-underline hover:opacity-60 transition-opacity" style={{ color: "var(--muted)" }}>Itinerary</Link>
-              <Link href="/places" className="uppercase no-underline hover:opacity-60 transition-opacity" style={{ color: "var(--muted)" }}>Places</Link>
-              <Link href="/budget" className="uppercase no-underline hover:opacity-60 transition-opacity" style={{ color: "var(--muted)" }}>Budget</Link>
+              <span style={{
+                fontFamily: "'Noto Sans JP', sans-serif", fontSize: "0.75rem",
+                color: "rgba(255,255,255,0.55)", fontWeight: 300,
+                display: "block", letterSpacing: "0.1em",
+              }}>TOKYO · IZU · KYOTO · NARA</span>
             </div>
-          </nav>
-        </header>
+          </Link>
+          {[
+            { href: "/itinerary", label: "📅 Itinerary" },
+            { href: "/places",    label: "🎯 Activities" },
+            { href: "/budget",    label: "💴 Budget" },
+          ].map(({ href, label }) => (
+            <Link key={href} href={href} style={{
+              color: "rgba(255,255,255,0.8)", textDecoration: "none",
+              fontSize: "0.85rem", fontWeight: 500, padding: "8px 14px",
+              borderRadius: "var(--radius-sm)", letterSpacing: "0.03em",
+            }}>
+              {label}
+            </Link>
+          ))}
+        </nav>
 
-        <main className="flex-1 max-w-3xl mx-auto w-full px-8 py-12">
-          {children}
-        </main>
-
-        <footer className="py-6 px-8 text-center text-sm tracking-wider" style={{ borderTop: "1px solid var(--border)", color: "var(--muted)" }}>
-          September 2026 &nbsp;·&nbsp; Tokyo · Izu · Kyoto · Nara
-        </footer>
+        {children}
       </body>
     </html>
   );
