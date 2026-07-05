@@ -101,25 +101,6 @@ export default function Home() {
             </Link>
           ))}
         </div>
-
-        {/* Trip stats */}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 16 }}>
-          {[
-            { icon: "🏨", value: "4", label: "Hotels" },
-            { icon: "🌸", value: "3", label: "Cities" },
-            { icon: "♨️",  value: "2", label: "Onsen nights" },
-            { icon: "✈️", value: "11", label: "Nights total" },
-          ].map(({ icon, value, label }) => (
-            <div key={label} style={{
-              background: "var(--white)", borderRadius: "var(--radius)",
-              boxShadow: "var(--shadow)", padding: "20px 12px", textAlign: "center",
-            }}>
-              <div style={{ fontSize: "1.5rem" }}>{icon}</div>
-              <div style={{ fontSize: "1.6rem", fontWeight: 700, color: "var(--green-deep)", lineHeight: 1.2 }}>{value}</div>
-              <div style={{ fontSize: "0.75rem", color: "var(--text-light)", marginTop: 4 }}>{label}</div>
-            </div>
-          ))}
-        </div>
       </div>
     </>
   );

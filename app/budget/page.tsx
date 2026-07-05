@@ -171,21 +171,12 @@ export default function Budget() {
 
       <div style={{ maxWidth: 900, margin: "0 auto", padding: "32px 24px" }}>
 
-        <div style={{
-          background: "var(--gold-light)", borderLeft: "4px solid var(--gold)",
-          borderRadius: "0 var(--radius-sm) var(--radius-sm) 0",
-          padding: "12px 16px", fontSize: "0.82rem", color: "#6b4f10", marginBottom: 24,
-        }}>
-          💡 Accommodation confirmed. Transport and dining costs extracted from itinerary — dining figures are <strong>estimates</strong>. Flights, Nara→Tokyo, and sightseeing entrance fees still TBD.
-          Exchange rate: ¥{RATE} = $1.
-        </div>
-
         {/* Summary cards */}
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16, marginBottom: 28 }}>
           {[
-            { label: "Known total (excl. flights & misc)", amount: `¥${fmt(knownTotalYen)}`, sub: `$${usd(knownTotalYen)} USD`, color: "var(--green-deep)" },
-            { label: "Per couple (known)", amount: `¥${fmt(Math.round(knownTotalYen / 2))}`, sub: `$${usd(knownTotalYen / 2)} USD`, color: "var(--green-mid)" },
-            { label: "Per person (known)", amount: `¥${fmt(Math.round(knownTotalYen / 4))}`, sub: `$${usd(knownTotalYen / 4)} USD`, color: "var(--gold)" },
+            { label: "Total", amount: `¥${fmt(knownTotalYen)}`, sub: `$${usd(knownTotalYen)} USD`, color: "var(--green-deep)" },
+            { label: "Per couple", amount: `¥${fmt(Math.round(knownTotalYen / 2))}`, sub: `$${usd(knownTotalYen / 2)} USD`, color: "var(--green-mid)" },
+            { label: "Per person", amount: `¥${fmt(Math.round(knownTotalYen / 4))}`, sub: `$${usd(knownTotalYen / 4)} USD`, color: "var(--gold)" },
           ].map(({ label, amount, sub, color }) => (
             <div key={label} style={{ background: "white", borderRadius: "var(--radius)", boxShadow: "var(--shadow)", padding: 20, textAlign: "center" }}>
               <div style={{ fontSize: "0.75rem", color: "var(--text-light)", letterSpacing: "0.08em", textTransform: "uppercase" }}>{label}</div>

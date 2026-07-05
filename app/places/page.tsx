@@ -28,11 +28,15 @@ const typeMeta: { key: string; emoji: string; label: string }[] = [
   { key: "Activity", emoji: "🎯", label: "Activities & Day Trips" },
 ];
 
+// Public assets are served under basePath in production (GitHub Pages subdirectory).
+const BASE = process.env.NODE_ENV === "production" ? "/japan-trip-plan" : "";
+
 interface PlaceItem {
   name: string;
   type: string;
   note: string;
   mapsUrl?: string;
+  image?: string; // filename in /public/places
 }
 
 const places: { city: string; note?: string; items: PlaceItem[] }[] = [
@@ -40,40 +44,40 @@ const places: { city: string; note?: string; items: PlaceItem[] }[] = [
     city: "Tokyo",
     note: "Tokyo activities are TBD — sights will be added once plans are confirmed.",
     items: [
-      { name: "Hotel Ryumeikan Tokyo", type: "Hotel", note: "Home base Sep 3–6 & Sep 13. Breakfast included.", mapsUrl: "https://maps.app.goo.gl/RVxQdXsJhuZDqvmW6" },
+      { name: "Hotel Ryumeikan Tokyo", type: "Hotel", note: "Home base Sep 3–6 & Sep 13. Breakfast included.", mapsUrl: "https://maps.app.goo.gl/RVxQdXsJhuZDqvmW6", image: "ryumeikan-tokyo.jpg" },
     ],
   },
   {
     city: "Izu",
     items: [
-      { name: "Ochiairo",       type: "Hotel", note: "Sep 7–8. Hillside ryokan, 3 meals included, open-air onsen.", mapsUrl: "https://maps.app.goo.gl/AN46nreHojnS9arF9" },
-      { name: "Shuzenji Onsen", type: "Sight", note: "Classic onsen town along the Katsura River — stop en route Sep 7 (11:30–1:30)" },
+      { name: "Ochiairo",       type: "Hotel", note: "Sep 7–8. Hillside ryokan, 3 meals included, open-air onsen.", mapsUrl: "https://maps.app.goo.gl/AN46nreHojnS9arF9", image: "ochiairo.jpg" },
+      { name: "Shuzenji Onsen", type: "Sight", note: "Classic onsen town along the Katsura River — stop en route Sep 7 (11:30–1:30)", image: "shuzenji-onsen.jpg" },
     ],
   },
   {
     city: "Kyoto",
     items: [
-      { name: "Sora Niwa Terrace",  type: "Hotel",    note: "Sep 9–11. Shijo-Kawaramachi area. Breakfast included.", mapsUrl: "https://maps.app.goo.gl/q2HjXffXJq1N2T4R9" },
-      { name: "Ponto-cho",          type: "Sight",    note: "Confirmed Sep 9 evening — narrow alley with bars and restaurants along the Kamo River" },
-      { name: "Star Bar",           type: "Bar",      note: "Confirmed Sep 9 — recommended bar near the hotel" },
-      { name: "Fushimi Inari",      type: "Sight",    note: "Stretch goal Sep 10 or 12 (5 AM) — thousands of torii gates, best before crowds" },
-      { name: "Kiyomizu-dera",      type: "Sight",    note: "Stretch goal Sep 10 or 12 — opens 6 AM, Ninenzaka cobblestone lane nearby" },
-      { name: "Nijo Castle",        type: "Sight",    note: "Recommended Sep 10 — Edo period castle with famous nightingale floors" },
-      { name: "Tofukuji",          type: "Sight",    note: "Recommended Sep 10 — beautiful Zen garden and wooden bridge" },
-      { name: "Sanjusangendo",      type: "Sight",    note: "Recommended Sep 10 — 1,001 statues, unique and unmissable" },
-      { name: "Kibune",             type: "Activity", note: "Day trip option Sep 11 — river dining (Hironbun or Nakayoshi) + Kurama Dera or Kifune Temple · ~¥20,000 pp" },
+      { name: "Sora Niwa Terrace",  type: "Hotel",    note: "Sep 9–11. Shijo-Kawaramachi area. Breakfast included.", mapsUrl: "https://maps.app.goo.gl/q2HjXffXJq1N2T4R9", image: "sora-niwa-terrace.jpg" },
+      { name: "Ponto-cho",          type: "Sight",    note: "Sep 9 evening — narrow alley with bars and restaurants along the Kamo River", image: "pontocho.jpg" },
+      { name: "Star Bar",           type: "Bar",      note: "Sep 9 — recommended bar near the hotel", image: "star-bar.jpg" },
+      { name: "Fushimi Inari",      type: "Sight",    note: "Stretch goal Sep 10 or 12 (5 AM) — thousands of torii gates, best before crowds", image: "fushimi-inari.jpg" },
+      { name: "Kiyomizu-dera",      type: "Sight",    note: "Stretch goal Sep 10 or 12 — opens 6 AM, Ninenzaka cobblestone lane nearby", image: "kiyomizu-dera.jpg" },
+      { name: "Nijo Castle",        type: "Sight",    note: "Recommended Sep 10 — Edo period castle with famous nightingale floors", image: "nijo-castle.jpg" },
+      { name: "Tofukuji",          type: "Sight",    note: "Recommended Sep 10 — beautiful Zen garden and wooden bridge", image: "tofukuji.jpg" },
+      { name: "Sanjusangendo",      type: "Sight",    note: "Recommended Sep 10 — 1,001 statues, unique and unmissable", image: "sanjusangendo.jpg" },
+      { name: "Kibune",             type: "Activity", note: "Day trip option Sep 11 — river dining (Hironbun or Nakayoshi) + Kurama Dera or Kifune Temple · ~¥20,000 pp", image: "kibune.jpg" },
     ],
   },
   {
     city: "Nara",
     items: [
-      { name: "Iroha Grand Hotel",    type: "Hotel", note: "Sep 12. Breakfast included.", mapsUrl: "https://maps.app.goo.gl/wpqzmnkaRuGvm4Zn9" },
-      { name: "Nara Deer Park",       type: "Sight", note: "Confirmed Sep 12 afternoon & Sep 13 morning — free-roaming deer" },
-      { name: "Shin-Yakushiji",       type: "Sight", note: "Confirmed Sep 12 — Masumi favorite, quiet temple with ancient clay guardian statues" },
-      { name: "Shiga Naoya's House",  type: "Sight", note: "Sep 12 if time — historic residence of the novelist" },
-      { name: "Kasuga Taisha",        type: "Sight", note: "Confirmed Sep 13 morning — thousands of stone and bronze lanterns" },
-      { name: "Todaiji Temple",       type: "Sight", note: "Confirmed Sep 13 morning — world's largest wooden building, giant bronze Buddha" },
-      { name: "Bar Savant",           type: "Food",  note: "Confirmed Sep 12 dinner — 5 min walk from hotel, highly recommended" },
+      { name: "Iroha Grand Hotel",    type: "Hotel", note: "Sep 12. Breakfast included.", mapsUrl: "https://maps.app.goo.gl/wpqzmnkaRuGvm4Zn9", image: "iroha-grand.jpg" },
+      { name: "Nara Deer Park",       type: "Sight", note: "Sep 12 afternoon & Sep 13 morning — free-roaming deer", image: "nara-deer-park.jpg" },
+      { name: "Shin-Yakushiji",       type: "Sight", note: "Sep 12 — Masumi favorite, quiet temple with ancient clay guardian statues", image: "shin-yakushiji.jpg" },
+      { name: "Shiga Naoya's House",  type: "Sight", note: "Sep 12 if time — historic residence of the novelist", image: "shiga-naoya-house.jpg" },
+      { name: "Kasuga Taisha",        type: "Sight", note: "Sep 13 morning — thousands of stone and bronze lanterns", image: "kasuga-taisha.jpg" },
+      { name: "Todaiji Temple",       type: "Sight", note: "Sep 13 morning — world's largest wooden building, giant bronze Buddha", image: "todaiji.jpg" },
+      { name: "Bar Savant",           type: "Food",  note: "Sep 12 dinner — 5 min walk from hotel, highly recommended", image: "bar-savant.jpg" },
     ],
   },
 ];
@@ -81,41 +85,56 @@ const places: { city: string; note?: string; items: PlaceItem[] }[] = [
 function PlaceCard({ item, city, showCity }: { item: PlaceItem; city: string; showCity?: boolean }) {
   const href = item.mapsUrl ?? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.name + " " + city + " Japan")}`;
   const tColor = typeColors[item.type] ?? "#888";
+  const cColor = cityColors[city] ?? "#888";
+
+  // "B3" ≈ 70% alpha — colored pills sit translucently over the photo.
+  const chips = (
+    <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
+      <span style={{
+        fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.08em",
+        padding: "3px 8px", borderRadius: 8,
+        background: tColor + "B3", color: "white",
+        backdropFilter: "blur(3px)", WebkitBackdropFilter: "blur(3px)",
+      }}>{item.type.toUpperCase()}</span>
+      {showCity && (
+        <span style={{
+          display: "inline-flex", alignItems: "center", gap: 4,
+          fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.08em",
+          padding: "3px 8px", borderRadius: 8,
+          background: cColor + "B3", color: "white",
+          backdropFilter: "blur(3px)", WebkitBackdropFilter: "blur(3px)",
+        }}>
+          <span style={{ width: 7, height: 7, borderRadius: "50%", background: "white" }} />
+          {city.toUpperCase()}
+        </span>
+      )}
+    </div>
+  );
+
   return (
-    <div style={{
+    <a href={href} target="_blank" rel="noopener noreferrer" style={{
+      display: "block", textDecoration: "none", color: "inherit", cursor: "pointer",
       background: "var(--white)", borderRadius: "var(--radius)",
       boxShadow: "var(--shadow)", overflow: "hidden",
-      borderTop: `3px solid ${tColor}`,
+      borderBottom: `3px solid ${tColor}`,
     }}>
-      <div style={{ padding: "14px 16px" }}>
-        <div style={{ marginBottom: 6, display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
-          <span style={{
-            fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.08em",
-            padding: "2px 7px", borderRadius: 8,
-            background: tColor + "18", color: tColor,
-          }}>{item.type.toUpperCase()}</span>
-          {showCity && (
-            <span style={{
-              display: "inline-flex", alignItems: "center", gap: 4,
-              fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.08em",
-              padding: "2px 7px", borderRadius: 8,
-              background: (cityColors[city] ?? "#888") + "18", color: cityColors[city] ?? "#888",
-            }}>
-              <span style={{ width: 7, height: 7, borderRadius: "50%", background: cityColors[city] ?? "#888" }} />
-              {city.toUpperCase()}
-            </span>
-          )}
+      {item.image ? (
+        <div style={{ position: "relative" }}>
+          <img
+            src={`${BASE}/places/${item.image}`}
+            alt={item.name}
+            loading="lazy"
+            style={{ width: "100%", height: 180, objectFit: "cover", display: "block" }}
+          />
+          <div style={{ position: "absolute", top: 8, left: 8 }}>{chips}</div>
         </div>
+      ) : null}
+      <div style={{ padding: "14px 16px" }}>
+        {!item.image && <div style={{ marginBottom: 6 }}>{chips}</div>}
         <div style={{ fontWeight: 700, fontSize: "0.9rem", color: "var(--green-deep)", marginBottom: 4 }}>{item.name}</div>
         <div style={{ fontSize: "0.78rem", color: "var(--text-mid)", lineHeight: 1.6 }}>{item.note}</div>
       </div>
-      <div style={{ padding: "8px 16px 10px", borderTop: "1px solid var(--border)" }}>
-        <a href={href} target="_blank" rel="noopener noreferrer"
-          style={{ fontSize: "0.72rem", color: "var(--green-mid)", textDecoration: "none", fontWeight: 600 }}>
-          View on Google Maps →
-        </a>
-      </div>
-    </div>
+    </a>
   );
 }
 
