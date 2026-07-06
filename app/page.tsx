@@ -85,11 +85,12 @@ export default function Home() {
             <div style={{ flex: 1, height: 1, background: "var(--border)" }} />
           </div>
         </Reveal>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16, marginBottom: 32 }}>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 16, marginBottom: 32 }}>
           {[
             { href: "/itinerary", icon: "📅", title: "Itinerary", desc: "Day-by-day plan across all four cities", accent: "var(--green-light)" },
             { href: "/places",    icon: "🎯", title: "Activities", desc: "Hotels, sights, and restaurants",      accent: "var(--gold)" },
-            { href: "/budget",    icon: "💴", title: "Budget",    desc: "Estimated costs in yen and USD",        accent: "var(--red-japan)" },
+            { href: "/food",      icon: "🍜", title: "Food",      desc: "Dishes to try, spot by spot",           accent: "var(--red-japan)" },
+            { href: "/budget",    icon: "💴", title: "Budget",    desc: "Estimated costs in yen and USD",        accent: "var(--green-mid)" },
           ].map(({ href, icon, title, desc, accent }, i) => (
             <Reveal key={href} delay={i * 150}>
               <Link href={href} style={{ textDecoration: "none" }}>

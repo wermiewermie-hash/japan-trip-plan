@@ -33,6 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {[
             { href: "/itinerary", label: "📅 Itinerary" },
             { href: "/places",    label: "🎯 Activities" },
+            { href: "/food",      label: "🍜 Food" },
             { href: "/budget",    label: "💴 Budget" },
           ].map(({ href, label }) => (
             <Link key={href} href={href} style={{
