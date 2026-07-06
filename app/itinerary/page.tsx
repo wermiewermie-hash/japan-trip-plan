@@ -198,9 +198,9 @@ const DAYS: Day[] = [
     location: "Kyoto area",
     items: [
       { time: "7:00 AM", emoji: "🛏️", text: "Hotel breakfast" },
-      {                  emoji: "💬", text: "Day trip Option 1: Kibune", note: "river dining (Hironbun or Nakayoshi) + a quaint temple in the woods (Kurama-dera or Kifune Shrine) · ~¥20,000 pp incl. fancy lunch", todo: true,
+      {                  emoji: "💬", text: "Day trip Option 1: Kibune", note: "river dining (Hirobun or Nakayoshi) + a quaint temple in the woods (Kurama-dera or Kifune Shrine) · ~¥20,000 pp incl. fancy lunch", todo: true,
         links: [
-          { label: "Hironbun", url: "https://tabelog.com/kyoto/A2601/A260502/26001599/" },
+          { label: "Hirobun", url: "https://tabelog.com/kyoto/A2601/A260502/26001599/" },
           { label: "Nakayoshi", url: "https://tabelog.com/kyoto/A2601/A260502/26004182/" },
           { label: "Kurama-dera", url: "https://maps.app.goo.gl/PUSavPhJiuY8buGq9" },
           { label: "Kifune Shrine", url: "https://maps.app.goo.gl/175zrsUKZNhqKrb36" },
@@ -260,8 +260,9 @@ const DAYS: Day[] = [
           { label: "Bar Savant", url: "https://maps.app.goo.gl/GNsJGXWKhrMaNHBf7" },
           { label: "Lamp Bar", url: "https://maps.app.goo.gl/WcvL1bAGoecvzamt5" },
         ] },
-      {                    emoji: "🍽️", text: "Dinner: Spanish at Arkodu (check reservations ~7/15), casual okonomiyaki at Okaru, or a local izakaya like Iccho", todo: true,
+      {                    emoji: "🍽️", text: "Dinner: Spanish at Akordu (check reservations ~7/15), casual okonomiyaki at Okaru, or a local izakaya like Iccho", todo: true,
         links: [
+          { label: "Akordu", url: "https://tabelog.com/en/nara/A2901/A290101/29010346/" },
           { label: "Okaru", url: "https://maps.app.goo.gl/5uKnrvu6WVdqYgNz5" },
           { label: "Iccho", url: "https://maps.app.goo.gl/vD5BXYFPxDweXWbMA" },
         ] },
@@ -325,7 +326,7 @@ export default function Itinerary() {
   return (
     <>
       <div className="animate-hero" style={{
-        background: "linear-gradient(135deg, var(--green-deep) 0%, var(--green-mid) 100%)",
+        background: "linear-gradient(135deg, #1f5138 0%, var(--green-light) 100%)",
         padding: "48px 24px 40px", textAlign: "center", position: "relative", overflow: "hidden",
       }}>
         <div style={{ position: "absolute", inset: 0, backgroundImage: CROSS_SVG }} />

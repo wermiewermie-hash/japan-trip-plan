@@ -66,7 +66,7 @@ const places: { city: string; note?: string; items: PlaceItem[] }[] = [
       { name: "Nijo Castle",        type: "Sight",    note: "Recommended Sep 10 — Edo period castle with famous nightingale floors", image: "nijo-castle.jpg" },
       { name: "Tofukuji",          type: "Sight",    note: "Recommended Sep 10 — beautiful Zen garden and wooden bridge", image: "tofukuji.jpg" },
       { name: "Sanjusangendo",      type: "Sight",    note: "Recommended Sep 10 — 1,001 statues, unique and unmissable", image: "sanjusangendo.jpg" },
-      { name: "Kibune",             type: "Activity", note: "Day trip option Sep 11 — river dining (Hironbun or Nakayoshi) + Kurama Dera or Kifune Temple · ~¥20,000 pp", image: "kibune.jpg" },
+      { name: "Kibune",             type: "Activity", note: "Day trip option Sep 11 — river dining (Hirobun or Nakayoshi) + Kurama Dera or Kifune Temple · ~¥20,000 pp", image: "kibune.jpg" },
     ],
   },
   {
@@ -149,7 +149,7 @@ export default function Places() {
   return (
     <>
       <div className="animate-hero" style={{
-        background: "linear-gradient(135deg, var(--green-deep) 0%, var(--green-mid) 100%)",
+        background: "linear-gradient(135deg, #7a5f10 0%, var(--gold) 100%)",
         padding: "48px 24px 40px", textAlign: "center", position: "relative", overflow: "hidden",
       }}>
         <div style={{ position: "absolute", inset: 0, backgroundImage: CROSS_SVG }} />

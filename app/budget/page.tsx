@@ -164,7 +164,7 @@ export default function Budget() {
   return (
     <>
       <div className="animate-hero" style={{
-        background: "linear-gradient(135deg, var(--green-deep) 0%, var(--green-mid) 100%)",
+        background: "linear-gradient(135deg, #163a2b 0%, var(--green-mid) 100%)",
         padding: "48px 24px 40px", textAlign: "center", position: "relative", overflow: "hidden",
       }}>
         <div style={{ position: "absolute", inset: 0, backgroundImage: CROSS_SVG }} />
