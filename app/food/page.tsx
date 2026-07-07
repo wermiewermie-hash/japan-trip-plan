@@ -99,12 +99,18 @@ const FOOD: FoodType[] = [
     key: "tonkatsu", emoji: "🍖", label: "Tonkatsu", blurb: "So much better than the dry stuff you get in the States. Often made from heritage Japanese pork, and you can specify the cut you want. Try the fried oysters too.",
     places: [
       { name: "Miyagawa Ton-emon", city: "Kyoto", note: "Dinner Sep 10 · ~¥5,000 pp · check reservations Aug 9", url: "https://maps.app.goo.gl/vpsff3NT1UiDDwmC8", planned: true },
+      { name: "Tonkatsu Suzuki", city: "Tokyo", note: "~8 min walk · loin & fillet sets in Gransta Yaekita by Tokyo Station", url: "https://maps.google.com/?q=Tonkatsu+Suzuki+Tokyo+Station" },
+      { name: "Katsuda", city: "Kyoto", note: "~5 min walk · loin & fillet sets near Shijo Kawaramachi", url: "https://maps.google.com/?q=Kyoto+Tonkatsu+Katsuda+Shijo+Kawaramachi" },
+      { name: "Saboten", city: "Nara", note: "~10 min walk · cutlet sets by Kintetsu Nara", url: "https://maps.google.com/?q=Saboten+Nara" },
     ],
   },
   {
     key: "cafes", emoji: "☕", label: "Old-timey cafés", blurb: "Kissaten — old-fashioned, wood-panelled cafés from the Showa era, where coffee is brewed by hand and the menu keeps throwback items like cream sodas and fruit parfaits. Try the coffee jelly.",
     places: [
       { name: "Soiree", city: "Kyoto", note: "Afternoon coffee Sep 9 · known for its jelly-topped drinks", url: "https://maps.app.goo.gl/fG5cnchQ2mBSVJ1N7" },
+      { name: "Mikado Coffee Nihonbashi", city: "Tokyo", note: "~12 min walk · Showa-era kissaten, hand-drip coffee & toast", url: "https://maps.google.com/?q=Mikado+Coffee+Nihonbashi" },
+      { name: "Inoda Coffee", city: "Kyoto", note: "~12 min walk · classic Kyoto coffee house · breakfast & pastries", url: "https://maps.google.com/?q=Inoda+Coffee+Main+Shop+Kyoto" },
+      { name: "Rokumei Coffee", city: "Nara", note: "~10 min walk · hand-drip & espresso in a quiet setting", url: "https://maps.google.com/?q=Rokumei+Coffee+Nara" },
     ],
   },
   {
@@ -129,17 +135,26 @@ const FOOD: FoodType[] = [
     key: "okonomiyaki", emoji: "🥘", label: "Okonomiyaki", blurb: "A Kansai local's favourite — kind of like a Japanese pizza. A cabbage-and-batter pancake griddled at the table and finished with brown sauce, bonito flakes, and mayonnaise.",
     places: [
       { name: "Okaru", city: "Nara", note: "Casual dinner option Sep 12", url: "https://maps.app.goo.gl/5uKnrvu6WVdqYgNz5" },
+      { name: "Kiji", city: "Tokyo", note: "~12 min walk · Osaka-style okonomiyaki & yakisoba in Marunouchi", url: "https://maps.google.com/?q=Okonomiyaki+Kiji+Marunouchi" },
+      { name: "Okonomiyaki Sho", city: "Kyoto", note: "~8 min walk · Kyoto-style okonomiyaki & teppan dishes", url: "https://maps.google.com/?q=Kyoto+Shitamachi+no+Okonomiyaki+Sho" },
+      { name: "Kameya", city: "Nara", note: "~8 min walk · Kansai-style okonomiyaki & teppanyaki", url: "https://maps.google.com/?q=Kameya+Okonomiyaki+Nara" },
     ],
   },
   {
     key: "yuba", emoji: "🍲", label: "Yuba", blurb: "The delicate skin lifted from simmering soy milk — a refined Kyoto specialty served fresh, rolled, or simmered.",
     places: [
       { name: "Yubanzai Komameya", city: "Kyoto", note: "Dinner option Sep 11", url: "https://maps.app.goo.gl/326KKFE58mf3PQBd9" },
+      { name: "Yuba Higashiyama Yuuzu", city: "Kyoto", note: "~15 min walk · handmade yuba in seasonal set meals", url: "https://maps.google.com/?q=Yuba+Higashiyama+Yuuzu+Kyoto" },
+      { name: "Yamatoan Honten", city: "Nara", note: "~10 min walk · Nara regional set meals, tofu & yuba", url: "https://maps.google.com/?q=Yamatoan+Honten+Nara" },
     ],
   },
   {
     key: "tsukemono", emoji: "🥬", label: "Kyo Tsukemono", blurb: "Kyoto's celebrated pickles — vegetables cured in salt, rice bran, or sake lees, bright and sharp alongside almost every meal. Shibazuke (cucumber with shiso) and paper-thin senmai-zuke daikon are local favourites.",
-    places: [],
+    places: [
+      { name: "Murakami Juhonten", city: "Kyoto", note: "~8 min walk · 18th-century Kyoto pickle shop", url: "https://maps.google.com/?q=Murakami+Juhonten+Kyoto" },
+      { name: "Nihombashi Takashimaya Food Hall", city: "Tokyo", note: "~8 min walk · depachika vendors with Kyoto-style tsukemono & narazuke", url: "https://maps.google.com/?q=Nihombashi+Takashimaya+Food+Hall" },
+      { name: "Mori Naraduke", city: "Nara", note: "~12 min walk · traditional narazuke specialty shop", url: "https://maps.google.com/?q=Mori+Naraduke+Nara" },
+    ],
   },
   {
     key: "tofu", emoji: "🧊", label: "Kyo Tofu", blurb: "Kyoto is known for its many varieties of tofu, not just the regular soybean kind. Try chewy sesame tofu, vegetal edamame tofu, and soft, custardy egg tofu.",
@@ -175,12 +190,18 @@ const FOOD: FoodType[] = [
     places: [
       { name: "Ponto-cho izakaya", city: "Kyoto", note: "Dinner & a stroll along the alley, Sep 9 · ~¥10,000 pp", url: "https://maps.app.goo.gl/Vfu7J2D69gPM15FP6" },
       { name: "Iccho", city: "Nara", note: "Local izakaya · casual dinner option Sep 12", url: "https://maps.app.goo.gl/vD5BXYFPxDweXWbMA" },
+      { name: "Hakkaisan Yaesu", city: "Tokyo", note: "~5 min walk · Niigata cuisine, seafood & Hakkaisan sake", url: "https://maps.google.com/?q=Hakkaisan+Yaesu+Tokyo" },
+      { name: "Kyo-machiya Obanzai Kohaku", city: "Kyoto", note: "~10 min walk · machiya obanzai & sake off Kiyamachi-dori", url: "https://maps.google.com/?q=Kyo-machiya+Obanzai+Kohaku+Kyoto" },
+      { name: "Kura", city: "Nara", note: "~10 min walk · seasonal dishes, sashimi & local sake", url: "https://maps.google.com/?q=Kura+Izakaya+Nara" },
     ],
   },
   {
     key: "yakitori", emoji: "🍢", label: "Yakitori", blurb: "Beak-to-tail skewers, where almost every part of the chicken is eaten — skin, heart, cartilage and all. Enjoyed casually with friends after work over cheap drinks; unstuffy middle-class food, not a high-end delicacy.",
     places: [
       { name: "Torikizoku", city: "Kyoto", note: "Trashy after-work vibe · dinner option Sep 9", url: "https://maps.app.goo.gl/puHudWTqDS1mpUHX6" },
+      { name: "Toriyoshi", city: "Tokyo", note: "~12–15 min walk · charcoal chicken skewers in Ginza", url: "https://maps.google.com/?q=Yakitori+Toriyoshi+Ginza" },
+      { name: "Torisei", city: "Kyoto", note: "~8 min walk · charcoal chicken & Fushimi sake on Kiyamachi", url: "https://maps.google.com/?q=Torisei+Shijo+Kiyamachi" },
+      { name: "Daikichi", city: "Nara", note: "~6 min walk · casual skewers by Kintetsu Nara", url: "https://maps.google.com/?q=Yakitori+Daikichi+Kintetsu+Nara" },
     ],
   },
   {
