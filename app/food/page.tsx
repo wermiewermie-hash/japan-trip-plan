@@ -45,6 +45,28 @@ const COORDS: Record<string, [number, number]> = {
   "H du Pont": [35.0078127, 135.7710433],
   "Kasuga Ninai-jyaya": [34.6823206, 135.8434241],
   "Akordu": [34.6878, 135.8368],
+  // Added recs. Geocoded (OSM): Mikado, Kiji, Nihombashi Takashimaya, Inoda, Okonomiyaki Sho.
+  // Others are approximate, anchored to the area/landmark noted in each listing.
+  "Tonkatsu Suzuki": [35.6822, 139.769],
+  "Mikado Coffee Nihonbashi": [35.6855483, 139.774798],
+  "Kiji": [35.6762341, 139.7656501],
+  "Hakkaisan Yaesu": [35.6796, 139.769],
+  "Toriyoshi": [35.6716, 139.766],
+  "Nihombashi Takashimaya Food Hall": [35.6813165, 139.7738266],
+  "Katsuda": [35.004, 135.768],
+  "Inoda Coffee": [35.0080944, 135.7631906],
+  "Okonomiyaki Sho": [35.0048216, 135.7682216],
+  "Yuba Higashiyama Yuuzu": [35.0, 135.78],
+  "Murakami Juhonten": [35.005, 135.7658],
+  "Kyo-machiya Obanzai Kohaku": [35.0055, 135.7709],
+  "Torisei": [35.0038, 135.7707],
+  "Saboten": [34.6832, 135.8285],
+  "Rokumei Coffee": [34.6818, 135.825],
+  "Kameya": [34.682, 135.8275],
+  "Yamatoan Honten": [34.6818, 135.8212],
+  "Mori Naraduke": [34.6797, 135.83],
+  "Kura": [34.6815, 135.8268],
+  "Daikichi": [34.6828, 135.8288],
 };
 
 const CROSS_SVG = `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/svg%3E")`;
@@ -305,6 +327,29 @@ function FoodCard({ place, chip }: { place: FoodPlace; chip: React.ReactNode }) 
 
 const GRID: React.CSSProperties = { display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px,1fr))", gap: 12 };
 
+// Free-form tip for the Kiyamachi-dori area — shown under Izakaya (by dish) and Kyoto (by location).
+function KiyamachiNote() {
+  return (
+    <div style={{
+      marginTop: 16,
+      background: "var(--white)", border: "1px solid var(--border)",
+      borderLeft: "4px solid var(--red-japan)", borderRadius: "var(--radius-sm)",
+      padding: "14px 18px",
+    }}>
+      <div style={{ fontWeight: 700, fontSize: "0.85rem", color: "var(--green-deep)", marginBottom: 6, display: "flex", alignItems: "center", gap: 6 }}>
+        🍶 Kiyamachi-dori evening walk
+      </div>
+      <p style={{ fontSize: "0.8rem", color: "var(--text-mid)", lineHeight: 1.7 }}>
+        The west side of Kiyamachi-dori between Shijō and Sanjō is a lovely stretch to explore for dinner —
+        compared with nearby Pontochō it has a higher concentration of neighbourhood restaurants and small,
+        independent izakaya. Rather than locking in one place ahead of time, walk north between Shijō and Sanjō
+        and look for spots with handwritten menus or daily specials. <strong>Torisei</strong> and{" "}
+        <strong>Kohaku</strong> (both listed here) make good anchors.
+      </p>
+    </div>
+  );
+}
+
 function SectionHeader({ title, count, dot }: { title: React.ReactNode; count?: number; dot?: string }) {
   return (
     <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: 14 }}>
@@ -391,6 +436,7 @@ export default function Food() {
                     No spot picked yet — add one to the checklist and it&apos;ll show up here.
                   </div>
                 )}
+                {key === "izakaya" && <KiyamachiNote />}
               </div>
             ))}
           </div>
@@ -411,6 +457,7 @@ export default function Food() {
                       </Reveal>
                     ))}
                   </div>
+                  {city === "Kyoto" && <KiyamachiNote />}
                 </div>
               );
             })}
