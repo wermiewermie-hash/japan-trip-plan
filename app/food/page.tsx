@@ -84,6 +84,12 @@ const FOOD: FoodType[] = [
     ],
   },
   {
+    key: "fusion", emoji: "✨", label: "Fancy fusion", blurb: "Inventive fine dining that blends Japanese ingredients with global technique — the kind of place you book well ahead.",
+    places: [
+      { name: "Akordu", city: "Nara", note: "Michelin-starred Spanish–Japanese · dinner option Sep 12 (check reservations ~7/15)", url: "https://tabelog.com/en/nara/A2901/A290101/29010346/" },
+    ],
+  },
+  {
     key: "tempura", emoji: "🍤", label: "Tempura", blurb: "Very different from the tempura you get in the States. Heavy focus on seasonal ingredients and rare vegetables, battered and fried right before you eat them, and served in courses.",
     places: [
       { name: "Tempura Taku", city: "Tokyo", note: "Fancy dinner Sep 5 · Masumi reserved via Tabelog · ~¥24,000 pp", url: "https://maps.app.goo.gl/veagfv5gx51sfrm2A", planned: true },
@@ -114,6 +120,7 @@ const FOOD: FoodType[] = [
       { name: "Nokishita 711", city: "Kyoto", note: "Nightcap option Sep 10 · botanical gin bar", url: "https://maps.app.goo.gl/UJq62s4gezZNUuan7" },
       { name: "Rum & Whiskey", city: "Kyoto", note: "Nightcap option Sep 10", url: "https://maps.app.goo.gl/MVEGQGyam8FKX8Ft6" },
       { name: "Bomb Bar", city: "Kyoto", note: "Karaoke after dinner Sep 10", url: "https://maps.app.goo.gl/NDJm2CbpNkWrNDCZ8" },
+      { name: "H du Pont", city: "Kyoto", note: "Wine bar · easy dinner option Sep 11", url: "https://maps.app.goo.gl/arZuEWxHt9rdn5PP6" },
       { name: "Bar Savant", city: "Nara", note: "Happy hour Sep 12 · 5 min from the hotel, fantastic", url: "https://maps.app.goo.gl/GNsJGXWKhrMaNHBf7" },
       { name: "Lamp Bar", city: "Nara", note: "Happy hour option Sep 12", url: "https://maps.app.goo.gl/WcvL1bAGoecvzamt5" },
     ],
@@ -154,8 +161,13 @@ const FOOD: FoodType[] = [
   },
   {
     key: "soba", emoji: "🥢", label: "Soba", blurb: "Buckwheat noodles with a nutty depth, served chilled with dipping sauce or hot in broth.",
+    places: [],
+  },
+  {
+    key: "wasabi", emoji: "🌿", label: "Fresh wasabi", blurb: "Izu's Amagi highlands grow some of Japan's finest wasabi, grated fresh over rice or soba — a world away from the tube stuff.",
     places: [
-      { name: "Zempuuteinanaban", city: "Izu", note: "Fresh soba & wasabi · lunch Sep 7 at Shuzenji", url: "https://maps.app.goo.gl/PVgWWxNTnQPzLwt89" },
+      { name: "Zempuuteinanaban", city: "Izu", note: "Fresh soba & wasabi · lunch option Sep 7 at Shuzenji", url: "https://maps.app.goo.gl/PVgWWxNTnQPzLwt89" },
+      { name: "Amago Chaya", city: "Izu", note: "Wasabi donburi & amago river fish · lunch option Sep 7 at Shuzenji", url: "https://maps.app.goo.gl/ynsmndHteXdPzbs76" },
     ],
   },
   {
@@ -176,21 +188,13 @@ const FOOD: FoodType[] = [
     places: [
       { name: "Ippodo", city: "Kyoto", note: "Tea & a tasting room · shopping Sep 10", url: "https://maps.app.goo.gl/jghGvV36CKp1keGe7" },
       { name: "Fukujuen", city: "Kyoto", note: "Historic tea merchant · shopping Sep 10", url: "https://maps.app.goo.gl/Tg45VtGX1ZgUTviJA" },
+      { name: "Kasuga Ninai-jyaya", city: "Nara", note: "Teahouse lunch inside Kasuga Taisha · Sep 12", url: "https://maps.app.goo.gl/xik7yYTUm7Buyfqz5" },
     ],
   },
   {
     key: "ekiben", emoji: "🍱", label: "Ekiben", blurb: "The station lunchbox — a regional bento bought on the platform and eaten on the train, every area with its own specialty.",
     places: [
       { name: "Tokyo Station ekiben", city: "Tokyo", note: "Grab before the Odoriko Sep 7 · and again Mishima → Kyoto Sep 9", url: "https://www.google.com/maps/search/?api=1&query=Ekiben%20Tokyo%20Station", planned: true },
-    ],
-  },
-  {
-    key: "other", emoji: "🍽️", label: "Also noted", blurb: "Other spots mentioned in the itinerary that don't fall under a specific dish above.",
-    places: [
-      { name: "Amago Chaya", city: "Izu", note: "Wasabi donburi & amago river fish · lunch alternative Sep 7 at Shuzenji", url: "https://maps.app.goo.gl/ynsmndHteXdPzbs76" },
-      { name: "H du Pont", city: "Kyoto", note: "Easy dinner option Sep 11", url: "https://maps.app.goo.gl/arZuEWxHt9rdn5PP6" },
-      { name: "Kasuga Ninai-jyaya", city: "Nara", note: "Teahouse lunch inside Kasuga Taisha · Sep 12", url: "https://maps.app.goo.gl/xik7yYTUm7Buyfqz5" },
-      { name: "Akordu", city: "Nara", note: "Michelin-starred Spanish · dinner option Sep 12 (check reservations ~7/15)", url: "https://tabelog.com/en/nara/A2901/A290101/29010346/" },
     ],
   },
 ];
