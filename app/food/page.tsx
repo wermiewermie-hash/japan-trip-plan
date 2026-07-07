@@ -84,7 +84,7 @@ const FOOD: FoodType[] = [
     ],
   },
   {
-    key: "fusion", emoji: "✨", label: "Fancy fusion", blurb: "Inventive fine dining that blends Japanese ingredients with global technique — the kind of place you book well ahead.",
+    key: "fusion", emoji: "✨", label: "Fancy fusion", blurb: "Lots of interesting fusion cuisines in Japan, and reinterpreted ingredients and palettes to suit Japanese tastebuds that are worth a try",
     places: [
       { name: "Akordu", city: "Nara", note: "Michelin-starred Spanish–Japanese · dinner option Sep 12 (check reservations ~7/15)", url: "https://tabelog.com/en/nara/A2901/A290101/29010346/" },
     ],
